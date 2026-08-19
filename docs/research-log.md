@@ -3,10 +3,10 @@
 ## Frozen sequence
 
 1. Closed-book contract written from the title only.
-2. Closed-book commit: `81f0b8461e7adaee5d6cbfe91562281778038827`.
+2. Closed-book commit: `b24c813d0f77cddb16f373db7b2d2effde3e265a`.
 3. Fixed secondary chapter fetched and read completely.
 4. Primary documentation fetched, locally verified, and used only for narrow corrections.
-5. Source comparison and single-authority ADR commit: `887b5bf1baaf41c4d27cd75f702aa9095e1db9da`.
+5. Source comparison and single-authority ADR commit: `910e8858010e294ebf4549be4784886328c841c3`.
 
 The design commit hash above must be checked against Git before release; this log never substitutes a local abbreviated hash or an
 unverified remote branch.

@@ -129,8 +129,8 @@ assert.equal(cardLikeValues, 0, 'tracked files contain a card-like digit sequenc
 
 const research = await readFile(resolve(root, 'docs/research-log.md'), 'utf8');
 assert.match(research, /9d8388721e7231442763ad37398b8d82224aa68f/);
-assert.match(research, /81f0b8461e7adaee5d6cbfe91562281778038827/);
-assert.match(research, /887b5bf1baaf41c4d27cd75f702aa9095e1db9da/);
+assert.match(research, /b24c813d0f77cddb16f373db7b2d2effde3e265a/);
+assert.match(research, /910e8858010e294ebf4549be4784886328c841c3/);
 assert.match(research, /attested=false/);
 assert.equal((research.match(/tf_[a-f0-9]{16}_[0-9]{8}T[0-9]{6}Z/g) ?? []).length, 8);
 
