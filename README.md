@@ -9,12 +9,19 @@ secondary chapter.
 
 ## Current status
 
-Closed-book design only. No executable implementation, real wallet compatibility, money movement, accounting approval,
-compliance, production behavior, or external acceptance is claimed yet.
+Closed-book and source-reviewed design are frozen. The executable PostgreSQL slice is not implemented yet. No real wallet
+compatibility, money movement, accounting approval, compliance, production behavior, or external acceptance is claimed.
 
 ## Read first
 
 - [Closed-book contract](docs/closed-book-contract.md)
+- [Source comparison](docs/source-comparison.md)
+- [Requirements](docs/requirements.md)
+- [Architecture](docs/architecture.md)
+- [API contract](docs/api.md)
+- [Operations](docs/operations.md)
+- [Threat model](docs/threat-model.md)
+- [ADR 0001: one PostgreSQL authority](docs/adr/0001-single-postgresql-authority.md)
 - [Security policy](SECURITY.md)
 
 ## Evidence boundary
