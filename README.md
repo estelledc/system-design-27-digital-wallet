@@ -10,8 +10,9 @@ secondary chapter.
 ## Current status
 
 The implementation now exercises one PostgreSQL 17 authority, stable request/transfer identity, canonical two-wallet locking,
-balanced immutable journal entries, append-only full reversal, revision-bound statements, and consistency audits. Local pure,
-database, true-process crash, smoke, benchmark, and dependency gates pass. Public CI is still pending.
+balanced immutable journal entries, append-only full reversal, revision-bound statements, and consistency audits. Local gates pass,
+and [implementation CI run 32216945261](https://github.com/estelledc/system-design-27-digital-wallet/actions/runs/32216945261)
+reproduced the full gate on Node 22, 24, and 26.
 
 ## Runnable slice
 
@@ -43,6 +44,14 @@ Against Node `v26.7.0` and PostgreSQL `17.11 (Homebrew)`:
 - production dependency audit: 0 high/critical findings.
 
 See [verification](docs/verification.md) for commands, timings, and exclusions.
+
+Public implementation jobs:
+
+Implementation commit: [`39ed82b9d8d800cacc456ca1f5a39120f512fafa`](https://github.com/estelledc/system-design-27-digital-wallet/commit/39ed82b9d8d800cacc456ca1f5a39120f512fafa).
+
+- [Node 22 + PostgreSQL 17](https://github.com/estelledc/system-design-27-digital-wallet/actions/runs/32216945261/job/95960132355)
+- [Node 24 + PostgreSQL 17](https://github.com/estelledc/system-design-27-digital-wallet/actions/runs/32216945261/job/95960132229)
+- [Node 26 + PostgreSQL 17](https://github.com/estelledc/system-design-27-digital-wallet/actions/runs/32216945261/job/95960132218)
 
 ## Run locally
 

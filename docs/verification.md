@@ -2,8 +2,9 @@
 
 ## Current status
 
-The full local gate passes. Public GitHub CI is pending, so the result is local implementation evidence rather than public
-reproducibility evidence.
+The full local gate passes. Public implementation CI run
+[`32216945261`](https://github.com/estelledc/system-design-27-digital-wallet/actions/runs/32216945261) also passed on Node
+22.23.2, 24.19.0, and 26.7.0 against PostgreSQL 17.11. The evidence-document commit still requires its own final CI run after push.
 
 | Boundary | Required receipt | Current state |
 |---|---|---|
@@ -13,7 +14,7 @@ reproducibility evidence.
 | smoke | exact wallet/transfer/journal/statement/page/audit counts | 3 / 3 / 3+6 / 1 / 2 / 1; audit passed |
 | benchmark | exact fixture, runtime/database versions, whole-batch timings, exclusions | completed; receipt below |
 | dependency risk | high/critical production audit result | `npm audit --audit-level=high`: 0 findings |
-| public reproducibility | implementation commit and Node 22/24/26 job/run IDs | pending |
+| public reproducibility | implementation commit and Node 22/24/26 job/run IDs | implementation commit `39ed82b9d8d800cacc456ca1f5a39120f512fafa`; run and jobs below passed |
 
 ## Local commands
 
@@ -74,7 +75,27 @@ percentiles, comparative runtime results, production capacity, durability, avail
 
 ## Public CI receipt
 
-Pending creation of the public repository and the implementation commit run. A local green command is not substituted for this row.
+Implementation commit: `39ed82b9d8d800cacc456ca1f5a39120f512fafa`.
+
+| Runtime | Job | Pure | PostgreSQL groups | True `SIGKILL` processes | Failed / skipped / todo | High/critical audit |
+|---|---|---:|---:|---:|---:|---:|
+| Node 22.23.2 + PostgreSQL 17.11 | [`95960132355`](https://github.com/estelledc/system-design-27-digital-wallet/actions/runs/32216945261/job/95960132355) | 15 | 10 | 7 | 0 / 0 / 0 | 0 |
+| Node 24.19.0 + PostgreSQL 17.11 | [`95960132229`](https://github.com/estelledc/system-design-27-digital-wallet/actions/runs/32216945261/job/95960132229) | 15 | 10 | 7 | 0 / 0 / 0 | 0 |
+| Node 26.7.0 + PostgreSQL 17.11 | [`95960132218`](https://github.com/estelledc/system-design-27-digital-wallet/actions/runs/32216945261/job/95960132218) | 15 | 10 | 7 | 0 / 0 / 0 | 0 |
+
+Each job also reproduced the same smoke counts and the exact 32-wallet / 101-transfer / 202-entry / 16-statement / 16-page /
+4-audit / 16-evidence-query benchmark fixture.
+
+### Public benchmark observations
+
+| Runtime | Create 31 | Fund 31 | Ring 62 | Reverse 8 | Statement + page 16 | Audit 4 | Evidence 16 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Node 22.23.2 | 154.560 ms | 409.574 ms | 729.941 ms | 65.109 ms | 143.827 ms | 25.090 ms | 42.398 ms |
+| Node 24.19.0 | 154.167 ms | 366.808 ms | 682.190 ms | 70.935 ms | 149.178 ms | 26.983 ms | 42.118 ms |
+| Node 26.7.0 | 152.940 ms | 380.532 ms | 684.255 ms | 69.746 ms | 150.543 ms | 26.675 ms | 41.430 ms |
+
+These are concurrent shared-runner observations from one run. They are retained verbatim and are not used to rank runtimes or infer
+QPS, percentiles, money throughput, production capacity, availability, durability, or SLA.
 
 No future green result may be described as real funds, ownership, accounting approval, compliance, high availability, power-loss
 durability, production capacity, SLA, recipient consumption, or external acceptance.

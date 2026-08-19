@@ -138,6 +138,11 @@ const readme = await readFile(resolve(root, 'README.md'), 'utf8');
 assert.match(readme, /one question/i);
 assert.match(readme, /external acceptance/i);
 assert.match(readme, /not implemented yet|implementation now exercises/i);
+assert.match(readme, /39ed82b9d8d800cacc456ca1f5a39120f512fafa/);
+assert.match(readme, /32216945261/);
+assert.match(readme, /95960132355/);
+assert.match(readme, /95960132229/);
+assert.match(readme, /95960132218/);
 
 process.stdout.write(`${JSON.stringify({
   checkedFiles: allFiles.length,
