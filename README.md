@@ -9,8 +9,51 @@ secondary chapter.
 
 ## Current status
 
-Closed-book and source-reviewed design are frozen. The executable PostgreSQL slice is not implemented yet. No real wallet
-compatibility, money movement, accounting approval, compliance, production behavior, or external acceptance is claimed.
+The implementation now exercises one PostgreSQL 17 authority, stable request/transfer identity, canonical two-wallet locking,
+balanced immutable journal entries, append-only full reversal, revision-bound statements, and consistency audits. Local pure,
+database, true-process crash, smoke, benchmark, and dependency gates pass. Public CI is still pending.
+
+## Runnable slice
+
+```text
+stable request
+    -> immutable transfer intent (no value effect)
+    -> source + destination locked by wallet ID
+    -> one authority revision
+    -> source debit + destination credit
+    -> two materialized balances + two balance versions
+    -> stored result for response-loss replay
+```
+
+- Genesis creates one explicit treasury with a fixed `10,000,000 LAB` supply; user wallets start at zero.
+- Wallet freeze/reactivation increments generation and permanently fences an older prepared transfer.
+- Reversal adds a new full compensating transfer. It never edits the original and can fail after the recipient spends the units.
+- A statement copies one total-ordered authority cut; later transfers cannot drift its pages.
+- An audit recomputes balances from genesis plus journal entries and reports projection/supply mismatch without auto-repair.
+
+## Local evidence
+
+Against Node `v26.7.0` and PostgreSQL `17.11 (Homebrew)`:
+
+- 15 pure tests and 10 real PostgreSQL integration groups: 0 failed, skipped, or todo;
+- 7 independent child processes killed with `SIGKILL` after commit and before response;
+- smoke: 3 wallets, 3 posted transfers, 3 journal transactions / 6 entries, 1 two-page statement, 1 passing audit;
+- bounded benchmark: 32 wallets, 101 posted transfers including 8 reversals, 202 entries, 16 statements/pages, 4 audits, and
+  16 evidence reads;
+- production dependency audit: 0 high/critical findings.
+
+See [verification](docs/verification.md) for commands, timings, and exclusions.
+
+## Run locally
+
+```bash
+npm ci --ignore-scripts
+npm run check
+DATABASE_URL=postgres://... npm run check:ci
+```
+
+`check:ci` requires a disposable PostgreSQL 17 database and resets the lab schema. It must never point at a shared or production
+database.
 
 ## Read first
 
